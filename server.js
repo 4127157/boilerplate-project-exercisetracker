@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/api/users', async (req, res) => {
-    let usr = req.params.username;
+    let usr = req.params;
     console.log(usr);
     res.json({
         username: usr
