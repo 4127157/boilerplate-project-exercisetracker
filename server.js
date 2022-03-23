@@ -19,12 +19,13 @@ mongoose.connect(process.env.MONGO_URI, {
 
 app.use(cors())
 app.use(express.static('public'))
+app.use(bodyParser.urlencoded({extended:false}));
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/views/index.html')
 });
 
 app.post('/api/users', async (req, res) => {
-    let usr = req.params;
+    let usr = req.params.username;
     console.log(usr);
     res.json({
         username: usr
