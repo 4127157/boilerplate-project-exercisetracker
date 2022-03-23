@@ -15,7 +15,16 @@ mongoose.connect(process.env.MONGO_URI, {
                                         })
     .catch(err => console.error(err));
 
-
+const Schema = mongoose.Schema;
+const userSchema = new Schema({
+    username: String,
+    exercises: [{
+                description: String,
+                duration: Number,
+                date: String
+                }]
+    });
+const User = mongoose.model("USER", userSchema);
 
 app.use(cors())
 app.use(express.static('public'))
@@ -26,10 +35,25 @@ app.get('/', (req, res) => {
 
 app.post('/api/users', async (req, res) => {
     let usr = req.body.username;
-    console.log(usr);
-    res.json({
-        username: usr
-    });
+    try{
+        let findUser = await User.findOne({
+            username: usr
+        });
+        if(findUser) {
+            res.json({findUser});
+        } else {
+            findUser = new User({
+                username: usr
+            });
+            await findUser.save();
+            res.json({findUser});
+        }
+    } catch (err) {
+        console.error(err);
+        res.json({
+            "error": "There was a server error while processing your request. Try again later."
+        });
+    }       
 });
 
 const listener = app.listen(process.env.PORT || 3000, () => {
