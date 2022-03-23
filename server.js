@@ -40,13 +40,13 @@ app.post('/api/users', async (req, res) => {
             username: usr
         });
         if(findUser) {
-            res.json({findUser});
+            res.json(findUser);
         } else {
             findUser = new User({
                 username: usr
             });
             await findUser.save();
-            res.json({findUser});
+            res.json(findUser);
         }
     } catch (err) {
         console.error(err);
