@@ -110,7 +110,7 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
                 {username: tempUser.username}, 
                 {
                     $push : {
-                        logs : {
+                        log : {
                             description: logDesc,
                             duration: parseInt(logDur),
                             date: logDate
@@ -120,9 +120,9 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
             tempUser = await findUser();
             res.json({
                 username: tempUser.username,
-                description: tempUser.logs.description,
-                duration: tempUser.logs.duration,
-                date: tempUser.logs.date,
+                description: tempUser.log.description,
+                duration: tempUser.log.duration,
+                date: tempUser.log.date,
                 _id: tempUser._id
             });
         }
