@@ -97,6 +97,10 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
             res.json({
                 "error":"Missing required field"
             });
+        } else { 
+            if(!logDate) {
+                console.log(Date().getFullYear().getDate().getMonth());
+            }
         }
     }
 });
