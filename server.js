@@ -117,7 +117,7 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
                         }
                     }
                 });
-            tempUser = await Users.findOne({_id:userId});
+            tempUser = await User.findOne({_id:userId});
             console.log(tempUser);
             res.json({
                 username: tempUser.username,
