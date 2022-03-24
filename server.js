@@ -104,22 +104,26 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
                 logDate = new Date(`${date.getFullYear()}-${temp}-${date.getDate()}`).toDateString();
                 console.log(logDate);
             }
-            // let tempUser = await findUser();
-            // let updateUser = await User.updateOne(
-            //     {username: tempUser}, 
-            //     {
-            //         $push : {
-            //             logs : {
-            //                 description: logDesc,
-            //                 duration: parseInt(logDur),
-            //                 date: logDate
-            //             }
-            //         }
-            //     });
-            // tempUser = await findUser();
-            // res.json({
-            //     username: tempUser.username,
-            //     description: tempUser.logs.description
+            let tempUser = await findUser();
+            let updateUser = await User.updateOne(
+                {username: tempUser}, 
+                {
+                    $push : {
+                        logs : {
+                            description: logDesc,
+                            duration: parseInt(logDur),
+                            date: logDate
+                        }
+                    }
+                });
+            tempUser = await findUser();
+            res.json({
+                username: tempUser.username,
+                description: tempUser.logs.description,
+                duration: tempUser.logs.duration,
+                date: tempUser.logs.date,
+                _id: tempUser._id
+            });
         }
     }
 });
