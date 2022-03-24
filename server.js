@@ -16,14 +16,18 @@ mongoose.connect(process.env.MONGO_URI, {
     .catch(err => console.error(err));
 
 const Schema = mongoose.Schema;
+
+const logSchema = new Schema({
+    description: String,
+    duration: Number,
+    date: String
+});
+
 const userSchema = new Schema({
     username: String,
-    exercises: [{
-                description: String,
-                duration: Number,
-                date: String
-                }]
+    log: [logSchema]
     });
+
 const User = mongoose.model("USER", userSchema);
 
 app.use(cors())
