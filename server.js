@@ -95,15 +95,31 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
     if(await findUser()){
         if(!logDesc || !logDur){
             res.json({
-                "error":"Missing required field"
+                "error":"Missing required field(s)"
             });
         } else { 
             if(!logDate) {
                 let date = new Date();
                 let temp = date.getMonth() < 10 ? '0'+(date.getMonth()+1) : (date.getMonth()+1);
-                logDate = `${date.getFullYear()}-${temp}-${date.getDate()}`;
+                logDate = new Date(`${date.getFullYear()}-${temp}-${date.getDate()}`).toDateString();
                 console.log(logDate);
             }
+            // let tempUser = await findUser();
+            // let updateUser = await User.updateOne(
+            //     {username: tempUser}, 
+            //     {
+            //         $push : {
+            //             logs : {
+            //                 description: logDesc,
+            //                 duration: parseInt(logDur),
+            //                 date: logDate
+            //             }
+            //         }
+            //     });
+            // tempUser = await findUser();
+            // res.json({
+            //     username: tempUser.username,
+            //     description: tempUser.logs.description
         }
     }
 });
