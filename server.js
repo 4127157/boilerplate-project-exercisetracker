@@ -99,7 +99,7 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
             });
         } else { 
             if(!logDate) {
-                console.log(Date.now().getFullYear());
+                console.log(new Date().getFullYear().getDate().getMonth());
             }
         }
     }
