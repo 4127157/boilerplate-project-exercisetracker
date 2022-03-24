@@ -75,7 +75,7 @@ app.get('/api/users', async (req, res) => {
 app.post('/api/users/:_id/exercises', async (req, res) => {
     console.log(req.params._id);
     let userId = req.params._id;
-    let findUser = () => {
+    let findUser = async () => {
         try {
             await User.findOne({
                 _id:userId
