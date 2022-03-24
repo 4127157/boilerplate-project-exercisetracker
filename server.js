@@ -67,6 +67,11 @@ app.post('/api/users', async (req, res) => {
     }       
 });
 
+app.get('/api/users', async (req, res) => {
+    let retObj = await Users.find().select({__v:0, log:0});
+    res.json(retObj);
+});
+
 const listener = app.listen(process.env.PORT || 3000, () => {
   console.log('Your app is listening on port ' + listener.address().port)
 })
