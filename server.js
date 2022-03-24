@@ -72,6 +72,12 @@ app.get('/api/users', async (req, res) => {
     res.json(retObj);
 });
 
+app.post('/api/users/:_id/exercises', async (req, res) => {
+    console.log(req.params._id);
+    // let findUser = awair User.findOne({'_id'
+    
+});
+
 const listener = app.listen(process.env.PORT || 3000, () => {
   console.log('Your app is listening on port ' + listener.address().port)
 })
