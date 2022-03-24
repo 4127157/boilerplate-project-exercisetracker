@@ -90,6 +90,7 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
     let logDate = req.body.date;
 
     if(await findUser()){
+        console.log(findUser());
         if(!logDesc || !logDur){
             res.json({
                 "error":"Missing required field"
