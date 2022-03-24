@@ -40,7 +40,7 @@ app.get('/', (req, res) => {
 app.post('/api/users', async (req, res) => {
     let usr = req.body.username;
     try{
-        let findUser = await User.findOne({
+        let findUser = User.findOne({
             username: usr
         });
         let temp = await findUser.select({username: 1});
