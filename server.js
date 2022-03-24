@@ -117,6 +117,7 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
                         }
                     }
                 });
+            console.log(updateUser);
             tempUser = await findUser();
             res.json({
                 username: tempUser.username,
