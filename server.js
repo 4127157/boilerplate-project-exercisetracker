@@ -18,17 +18,16 @@ mongoose.connect(process.env.MONGO_URI, {
 const Schema = mongoose.Schema;
 
 const logSchema = new Schema({
-    type: Array,
-    description: String,
-    duration: Number,
-    date: String
+    description: {type: String},
+    duration: {type: Number},
+    date: {type: String}
 });
 
 const userSchema = new Schema({
     username: String,
     log: [logSchema],
-    },
-    {typeKey: '$type'});
+    });
+    
 
 const User = mongoose.model("USER", userSchema);
 
