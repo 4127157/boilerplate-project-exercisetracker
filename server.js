@@ -45,7 +45,10 @@ app.post('/api/users', async (req, res) => {
         });
         let temp = async () =>{ 
             let tempo = await User.findOne({username:usr}).select({username: 1, _id: 1});
-            return tempo;
+            return {
+                username: tempo.username,
+                _id: tempo._id;
+            };
         }
         if(findUser) {
             res.json( await temp());
