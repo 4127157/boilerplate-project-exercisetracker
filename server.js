@@ -44,7 +44,7 @@ app.post('/api/users', async (req, res) => {
             username: usr
         });
         let temp = await findUser.select({username: 1});
-        if(findUser) {
+        if(temp) {
             res.json(temp);
         } else {
             findUser = new User({
