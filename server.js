@@ -68,7 +68,7 @@ app.post('/api/users', async (req, res) => {
 });
 
 app.get('/api/users', async (req, res) => {
-    let retObj = await Users.find().select({__v:0, log:0});
+    let retObj = await User.find().select({__v:0, log:0});
     res.json(retObj);
 });
 
