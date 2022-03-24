@@ -40,11 +40,11 @@ app.get('/', (req, res) => {
 app.post('/api/users', async (req, res) => {
     let usr = req.body.username;
     try{
-        let findUser = User.findOne({
+        let findUser = await User.findOne({
             username: usr
         });
-        let temp = await findUser.select({username: 1});
-        if(temp) {
+        let temp = () => User.findOne({username:usr}).select({username: 1, _id:1});
+        if(findUser) {
             res.json(temp);
         } else {
             findUser = new User({
