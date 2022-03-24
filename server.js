@@ -48,13 +48,13 @@ app.post('/api/users', async (req, res) => {
             return tempo;
         }
         if(findUser) {
-            res.json(temp());
+            res.json( await temp());
         } else {
             findUser = new User({
                 username: usr
             });
             await findUser.save();
-            res.json(temp());
+            res.json( await temp());
         }
     } catch (err) {
         console.error(err);
