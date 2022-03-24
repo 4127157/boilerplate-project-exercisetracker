@@ -45,13 +45,13 @@ app.post('/api/users', async (req, res) => {
         });
         let temp = async () =>{ return await User.findOne({username:usr}).select({username: 1, _id:1}); }
         if(findUser) {
-            res.json(temp);
+            res.json(temp());
         } else {
             findUser = new User({
                 username: usr
             });
             await findUser.save();
-            res.json(temp);
+            res.json(temp());
         }
     } catch (err) {
         console.error(err);
