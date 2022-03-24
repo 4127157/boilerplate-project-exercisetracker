@@ -81,15 +81,20 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
                 _id:userId
             });
         } catch (err) {
+            res.json({"error":"User does not exist or there was an error"});
             console.error(err);
         }
     }
     let logDesc = req.body.description;
     let logDur = req.body.duration;
     let logDate = req.body.date;
+
     if(await findUser()){
-    } else {
-        res.json({"error":"User does not exist"});
+        if(!logDesc || !logDur){
+            res.json({
+                "error":"Missing required field"
+            });
+        }
     }
 });
 
