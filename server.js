@@ -18,9 +18,9 @@ mongoose.connect(process.env.MONGO_URI, {
 const Schema = mongoose.Schema;
 
 const logSchema = new Schema({
-    description: {type: String},
-    duration: {type: Number},
-    date: {type: String}
+    description: String,
+    duration: Number,
+    date: String
 });
 
 const userSchema = new Schema({
@@ -107,7 +107,7 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
             }
             let tempUser = await findUser();
             let updateUser = await User.updateOne(
-                {username: tempUser}, 
+                {username: tempUser.username}, 
                 {
                     $push : {
                         logs : {
