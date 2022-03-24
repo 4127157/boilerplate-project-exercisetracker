@@ -47,7 +47,7 @@ app.post('/api/users', async (req, res) => {
             let tempo = await User.findOne({username:usr}).select({username: 1, _id: 1});
             return {
                 username: tempo.username,
-                _id: tempo._id;
+                _id: tempo._id
             };
         }
         if(findUser) {
