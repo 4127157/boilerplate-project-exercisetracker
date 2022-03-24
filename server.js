@@ -121,9 +121,9 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
             console.log(tempUser);
             res.json({
                 username: tempUser.username,
-                description: tempUser.log.description,
-                duration: tempUser.log.duration,
-                date: tempUser.log.date,
+                description: logDesc,
+                duration: logDur,
+                date: logDate,
                 _id: tempUser._id
             });
         }
