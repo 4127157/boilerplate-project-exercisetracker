@@ -27,8 +27,8 @@ const logSchema = new Schema({
 const userSchema = new Schema({
     username: String,
     log: [logSchema],
-    typeKey: '$type'
-    });
+    },
+    {typeKey: '$type'});
 
 const User = mongoose.model("USER", userSchema);
 
