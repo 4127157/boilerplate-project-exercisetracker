@@ -100,7 +100,13 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
         } else { 
             if(!logDate) {
                 let date = new Date();
-                logDate = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`;
+                let temp;
+                if(date.getMonth() < 10){
+                    temp = '0'+date.getMonth();
+                } else {
+                    temp = date.getMonth();
+                }
+                logDate = `${date.getFullYear()}-${temp}-${date.getDate()}`;
                 console.log(logDate);
             }
         }
