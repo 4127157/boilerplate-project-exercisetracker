@@ -76,14 +76,16 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
     console.log(req.params._id);
     let userId = req.params._id;
     let findUser = async () => {
+        let temp;
         try {
-            await User.findOne({
+            temp = await User.findOne({
                 _id:userId
             });
         } catch (err) {
             res.json({"error":"User does not exist or there was an error"});
             console.error(err);
         }
+        return temp;
     }
     let logDesc = req.body.description;
     let logDur = req.body.duration;
