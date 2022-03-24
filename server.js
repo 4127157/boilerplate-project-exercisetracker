@@ -75,7 +75,9 @@ app.get('/api/users', async (req, res) => {
 app.post('/api/users/:_id/exercises', async (req, res) => {
     console.log(req.params._id);
     let userId = req.params._id;
-    let findUser = await User.findOne({'_id':userId});
+    let findUser = await User.findOne({
+        _id:userId
+    });
     let logDesc = req.body.description;
     let logDur = req.body.duration;
     let logDate = req.body.date;
