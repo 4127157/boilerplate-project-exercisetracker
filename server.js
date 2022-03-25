@@ -94,34 +94,35 @@ app.get('/api/users/:id/logs', async (req, res) => {
     }
     findUser = await findUser();
     let logs = await User.findOne({_id:userId}).select({log:{_id:0}, __v:0, username:0, _id:0});
+    logs = logs.log;
     console.log(logs.log);
 
     if( qFrom || qTo || qLimit) {
         if(qFrom){
             let tempDate = new Date(qFrom);
-            logs = logs["log"].filter(item => 
+            logs = logs.filter(item => 
                 new Date(item.date) >= tempDate
             );
         }
 
         if(qTo){
             let tempDate = new Date(qTo);
-            logs = logs["log"].filter(item => new Date(item.date) <= tempDate); 
+            logs = logs.filter(item => new Date(item.date) <= tempDate); 
 
         }
 
         if(qLimit){
             if(logs.length > qLimit){
-                logs["log"].splice(0, (logs.length-(logs.length-qLimit)));
+                logs.splice(0, (logs.length-(logs.length-qLimit)));
             }
         }
     }
 
     res.json({
         username: findUser.username,
-        count: (logs.log.length),
+        count: (logs.length),
         _id: findUser._id,
-        log: logs.log
+        log: logs
     });
 });
 
