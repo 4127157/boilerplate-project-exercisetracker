@@ -73,8 +73,11 @@ app.get('/api/users', async (req, res) => {
     res.json(retObj);
 });
 
-app.get('/api/users/:id/logs', async (req, res) => {
+app.get('/api/users/:id/logs?:from&:to&:limit', async (req, res) => {
     console.log(req.params.id);
+    console.log(req.params.from);
+    console.log(req.params.to);
+    console.log(req.params.limit);
     let userId = req.params.id;
     let findUser = async () => {
         let temp;
