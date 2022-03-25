@@ -99,20 +99,20 @@ app.get('/api/users/:id/logs', async (req, res) => {
     if( qFrom || qTo || qLimit) {
         if(qFrom){
             let tempDate = new Date(qFrom);
-            logs = logs.filter(item => 
+            logs = logs["log"].filter(item => 
                 new Date(item.date) >= tempDate
             );
         }
 
         if(qTo){
             let tempDate = new Date(qTo);
-            logs = logs.filter(item => new Date(item.date) <= tempDate); 
+            logs = logs["log"].filter(item => new Date(item.date) <= tempDate); 
 
         }
 
         if(qLimit){
             if(logs.length > qLimit){
-                logs.splice(0, (logs.length-(logs.length-qLimit)));
+                logs["log"].splice(0, (logs.length-(logs.length-qLimit)));
             }
         }
     }
