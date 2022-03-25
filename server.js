@@ -140,7 +140,7 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
                         log : {
                             description: logDesc,
                             duration: parseInt(logDur),
-                            date: logDate
+                            date: new Date(logDate).toDateString()
                         }
                     }
                 });
