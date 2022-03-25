@@ -3,6 +3,7 @@ const app = express();
 const mongodb = require('mongodb');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const querystring = require('querystring');
 const cors = require('cors')
 require('dotenv').config()
 
@@ -73,7 +74,7 @@ app.get('/api/users', async (req, res) => {
     res.json(retObj);
 });
 
-app.get('/api/users/:id/logs?from=:from&to=:to&limit=:limit', async (req, res) => {
+app.get('/api/users/:id/logs', async (req, res) => {
     console.log(req.params.id);
     console.log(req.query.from);
     console.log(req.query.to);
