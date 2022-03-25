@@ -75,9 +75,9 @@ app.get('/api/users', async (req, res) => {
 
 app.get('/api/users/:id/logs?from=:from&to=:to&limit=:limit', async (req, res) => {
     console.log(req.params.id);
-    console.log(req.params.from);
-    console.log(req.params.to);
-    console.log(req.params.limit);
+    console.log(req.query.from);
+    console.log(req.query.to);
+    console.log(req.query.limit);
     let userId = req.params.id;
     let findUser = async () => {
         let temp;
