@@ -129,7 +129,8 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
             if(!logDate) {
                 let date = new Date();
                 let temp = date.getMonth() < 10 ? '0'+(date.getMonth()+1) : (date.getMonth()+1);
-                logDate = new Date(`${date.getFullYear()}-${temp}-${date.getDate()}`).toDateString();
+                // logDate = new Date(`${date.getFullYear()}-${temp}-${date.getDate()}`).toDateString();
+                logDate = date.toDateString();
             }
             let tempUser = await findUser();
             let updateUser = await User.updateOne(
