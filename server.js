@@ -89,7 +89,7 @@ app.get('/api/users/:id/logs', async (req, res) => {
         return temp;
     }
     findUser = await findUser();
-    console.log(findUser.log);
+    console.log(await findUser.log.select({_id:0}));
 });
 
 
