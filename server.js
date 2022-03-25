@@ -76,9 +76,9 @@ app.get('/api/users', async (req, res) => {
 
 app.get('/api/users/:id/logs', async (req, res) => {
     console.log(req.params.id);
-    console.log(req.query.from);
-    console.log(req.query.to);
-    console.log(req.query.limit);
+    let qFrom = (req.query.from);
+    let qTo = (req.query.to);
+    let qLimit = (req.query.limit);
     let userId = req.params.id;
     let findUser = async () => {
         let temp;
@@ -95,6 +95,27 @@ app.get('/api/users/:id/logs', async (req, res) => {
     findUser = await findUser();
     let logs = await User.findOne({_id:userId}).select({log:{_id:0}, __v:0, username:0, _id:0});
     console.log(logs.log);
+
+    if( qFrom || qTo || qLimit) {
+        if(qFrom){
+            let tempDate = new Date(qFrom);
+            logs = logs.filter(item => 
+                new Date(item.date) >= tempDate
+            );
+        }
+
+        if(qTo){
+            let tempDate = new Date(qTo);
+            logs = logs.filter(item => new Date(item.date) <= tempDate); 
+
+        }
+
+        if(qLimit){
+            if(logs.length > qLimit){
+                logs.splice(0, (logs.length-(logs.length-qLimit)));
+            }
+        }
+    }
 
     res.json({
         username: findUser.username,
