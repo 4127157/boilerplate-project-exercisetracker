@@ -76,7 +76,7 @@ app.get('/api/users', async (req, res) => {
 app.get('/api/users/:id/logs', async (req, res) => {
     console.log(req.params.id);
     let userId = req.params.id;
-    let findUser = async () => {
+    let findUser = async await () => {
         let temp;
         try {
             temp = await User.findOne({
@@ -88,8 +88,8 @@ app.get('/api/users/:id/logs', async (req, res) => {
         }
         return temp;
     }
-    findUser = await findUser();
-    console.log( findUser);
+    // findUser = await findUser();
+    console.log(findUser);
 
 });
 
