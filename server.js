@@ -73,8 +73,27 @@ app.get('/api/users', async (req, res) => {
     res.json(retObj);
 });
 
+app.get('/api/users/:id/logs', async (req, res) => {
+    console.log(req.params.id);
+    let userId = req.params.id;
+    let findUser = async () => {
+        let temp;
+        try {
+            temp = await User.findOne({
+                _id:userId
+            });
+        } catch (err) {
+            res.json({"error":"User does not exist or there was an error"});
+            console.error(err);
+        }
+        return temp;
+    }
+    console.log(findUser().username);
+
+});
+
+
 app.post('/api/users/:_id/exercises', async (req, res) => {
-    console.log(req.params._id);
     let userId = req.params._id;
     let findUser = async () => {
         let temp;
@@ -103,7 +122,6 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
                 let date = new Date();
                 let temp = date.getMonth() < 10 ? '0'+(date.getMonth()+1) : (date.getMonth()+1);
                 logDate = new Date(`${date.getFullYear()}-${temp}-${date.getDate()}`).toDateString();
-                console.log(logDate);
             }
             let tempUser = await findUser();
             let updateUser = await User.updateOne(
@@ -118,8 +136,7 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
                     }
                 });
             tempUser = await User.findOne({_id:userId});
-            console.log(tempUser);
-            console.log(tempUser.log.length);
+            console.log(tempUser.log.length); //Useful for logs endpoint
             res.json({
                 username: tempUser.username,
                 description: logDesc,
