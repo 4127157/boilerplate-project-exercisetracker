@@ -144,13 +144,14 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
                     }
                 });
             tempUser = await User.findOne({_id:userId});
+            logDur = parseInt(logDur);
             console.log(tempUser.log.length); //Useful for logs endpoint
             res.json({
+                _id: tempUser._id,
                 username: tempUser.username,
-                description: logDesc,
-                duration: logDur,
                 date: logDate,
-                _id: tempUser._id
+                duration: logDur,
+                description: logDesc
             });
         }
     }
