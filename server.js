@@ -89,7 +89,8 @@ app.get('/api/users/:id/logs', async (req, res) => {
         return temp;
     }
     findUser = await findUser();
-    console.log(await findUser.log.select({_id:0}));
+    let logs = await User.findOne({_id:userId}).select({log:1});
+    console.log(log);
 });
 
 
