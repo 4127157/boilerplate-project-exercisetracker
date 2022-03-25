@@ -147,7 +147,7 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
             tempUser = await User.findOne({_id:userId});
             logDur = parseInt(logDur);
             console.log(tempUser.log.length); //Useful for logs endpoint
-            console.log(logDate.toDateString());
+            console.log(new Date(logDate).toDateString());
             let tempObject = 
             {
                 _id: (tempUser._id).toString(),
