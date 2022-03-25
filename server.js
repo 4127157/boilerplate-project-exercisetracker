@@ -149,11 +149,11 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
             console.log(tempUser.log.length); //Useful for logs endpoint
             let tempObject = 
             {
-                _id: tempUser._id,
-                username: tempUser.username,
-                date: logDate,
-                duration: logDur,
-                description: logDesc
+                _id: (tempUser._id).toString(),
+                username: (tempUser.username).toString(),
+                date: date.toDateString(),
+                duration: parseInt(logDur),
+                description: logDesc.toString()
             };
             res.json(tempObject);
         }
